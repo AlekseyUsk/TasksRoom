@@ -42,6 +42,9 @@ android {
 
 dependencies {
 
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
+
     //room
     kapt "androidx.room:room-compiler:2.5.1"
     implementation "androidx.room:room-runtime:2.5.1"

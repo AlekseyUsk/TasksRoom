@@ -32,10 +32,8 @@ class TaskItemAdapter : RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder>
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(taskItemViewHolder : TaskItemViewHolder, position: Int) {
-    val item = data[position]
-        taskItemViewHolder.bind(item)
+    override fun onBindViewHolder(holder : TaskItemViewHolder, position: Int) {
+    var item = data[position]
+        holder.bind(item)
     }
-
-
 }

@@ -1,11 +1,11 @@
 package com.bignerdranch.android.tasks
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.tasks.adapter.TaskItemAdapter
 import com.bignerdranch.android.tasks.databinding.FragmentTasksBinding
@@ -25,8 +25,8 @@ class TasksFragment : Fragment() {
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val application = requireNotNull(this.activity).application //получает ссылку на текущее приложение, создает базу данных
-        val dao = TaskDatabase.getINSTANCE(application).taskDao //присваивает свой объект TaskDao локальной переменной с именем dao
+        val application = requireNotNull(this.activity).application
+        val dao = TaskDatabase.getINSTANCE(application).taskDao
 
         val viewModelFactory = TasksViewModelFactory(dao)
         val  viewModel = ViewModelProvider(this,viewModelFactory).get(TasksViewModel::class.java)
@@ -36,6 +36,10 @@ class TasksFragment : Fragment() {
 
         val adapter = TaskItemAdapter()
         binding.tasksList.adapter = adapter
+
+        viewModel.tasks.observe(viewLifecycleOwner, Observer {
+            it?.let { adapter.data = it }
+        })
 
         return view
     }

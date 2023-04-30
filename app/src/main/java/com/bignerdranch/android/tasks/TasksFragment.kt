@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bignerdranch.android.tasks.adapter.TaskItemAdapter
+import com.bignerdranch.android.tasks.recyclerview.adapter.TaskItemAdapter
 import com.bignerdranch.android.tasks.databinding.FragmentTasksBinding
 import com.bignerdranch.android.tasks.room.TaskDatabase
 import com.bignerdranch.android.tasks.viewmodel.TasksViewModel
@@ -15,7 +15,7 @@ import com.bignerdranch.android.tasks.viewmodel.TasksViewModelFactory
 
 class TasksFragment : Fragment() {
 
-    private var _binding : FragmentTasksBinding? = null
+    private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class TasksFragment : Fragment() {
         val dao = TaskDatabase.getINSTANCE(application).taskDao
 
         val viewModelFactory = TasksViewModelFactory(dao)
-        val  viewModel = ViewModelProvider(this,viewModelFactory).get(TasksViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(TasksViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -38,7 +38,7 @@ class TasksFragment : Fragment() {
         binding.tasksList.adapter = adapter
 
         viewModel.tasks.observe(viewLifecycleOwner, Observer {
-            it?.let { adapter.data = it }
+            it?.let { adapter.submitList(it) }
         })
 
         return view

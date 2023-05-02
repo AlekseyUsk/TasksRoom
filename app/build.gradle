@@ -4,6 +4,8 @@ plugins {
 
     //Room
     id 'kotlin-kapt'
+    //Safe Args
+    id 'androidx.navigation.safeargs' version '2.4.2' apply false
 }
 
 
@@ -38,6 +40,8 @@ android {
     buildFeatures {
         dataBinding true
     }
+    // Safe Args
+    apply plugin: 'androidx.navigation.safeargs'
 }
 
 dependencies {
@@ -47,6 +51,8 @@ dependencies {
 
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     //room
     kapt "androidx.room:room-compiler:2.5.1"
@@ -58,6 +64,10 @@ dependencies {
 
     //viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+
+    //навигация
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 

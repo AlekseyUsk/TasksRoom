@@ -33,7 +33,7 @@ class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit) :
         TaskItemViewHolder.inflateFrom(parent)
 
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
-        var item = getItem(position)
+        val item = getItem(position)
         holder.bind(item, clickListener)
     }
 }

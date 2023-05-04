@@ -37,8 +37,9 @@ class TasksFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = TaskItemAdapter { taskId ->
-            viewModel.onTaskClicked(taskId)
+            viewModel.onTaskClicked(taskId) //после клика устанавливая для свойства navigateToTask идентификатор задачи
         }
+
         binding.tasksList.adapter = adapter
 
         viewModel.tasks.observe(viewLifecycleOwner, Observer {
@@ -47,7 +48,7 @@ class TasksFragment : Fragment() {
 
         viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
             taskId?.let {
-                var action = TasksFragmentDirections.actionTasksFragmentToEditTaskFragment(taskId)
+                val action = TasksFragmentDirections.actionTasksFragmentToEditTaskFragment(taskId)
                 this.findNavController().navigate(action)
                 viewModel.onTaskNavigated()
             }
